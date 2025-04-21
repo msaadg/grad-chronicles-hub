@@ -12,6 +12,8 @@ import Upload from "./pages/Upload";
 import ViewDocument from "./pages/ViewDocument";
 import ManageDocuments from "./pages/ManageDocuments";
 import NotFound from "./pages/NotFound";
+import Chatbot from "./pages/Chatbot";
+import Profile from "./pages/Profile";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +32,8 @@ const App = () => (
           <Route path="/upload" element={<Upload />} />
           <Route path="/document/:id" element={<ViewDocument />} />
           <Route path="/manage-documents" element={<ManageDocuments />} />
+          <Route path="/chatbot" element={<Chatbot />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
@@ -38,3 +42,4 @@ const App = () => (
 );
 
 export default App;
+

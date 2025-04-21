@@ -1,98 +1,106 @@
 
-import { useState } from 'react';
-import { Search, Upload, Folder } from 'lucide-react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import { useState } from "react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { Folder } from "lucide-react";
 
 const ManageDocuments = () => {
-  const [hasDocuments, setHasDocuments] = useState(true);
-  
-  // Example document data
+  const [hasDocuments, setHasDocuments] = useState(false);
+  // The document data here should reflect from API in real use
   const documents = [
     {
-      id: '1',
-      title: 'CS101 Midterm Notes',
-      course: 'Computer Science 101',
-      uploadDate: '2024-02-22',
-      downloads: 120
-    }
+      id: "1",
+      title: "CS101 Midterm Notes",
+      course: "Computer Science 101",
+      uploadDate: "2024-02-22",
+      downloads: 120,
+    },
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-[#f6f6f7]">
       <Navbar isLoggedIn={true} />
-      
-      <main className="flex-grow py-10">
+
+      <main className="flex-grow pt-7 pb-8">
         <div className="page-container">
-          <h1 className="text-3xl font-bold mb-8">Manage Your Documents</h1>
-          
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+          <h1 className="text-3xl font-bold mb-6 text-gray-900 leading-tight">
+            Manage Your Documents
+          </h1>
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-0">
             {/* Search Bar */}
-            <div className="p-4 border-b border-gray-100">
+            <div className="p-5 border-b border-gray-100">
               <div className="relative">
                 <input
                   type="text"
                   placeholder="Search your documents by title or course..."
-                  className="w-full py-2.5 pl-10 pr-4 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-purple/50"
+                  className="w-full py-3 pl-12 pr-4 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-purple/50"
                 />
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <Search className="h-5 w-5 text-gray-400" />
+                  <svg className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                 </div>
               </div>
             </div>
-            
-            {hasDocuments ? (
-              <>
-                {/* Table Header */}
-                <div className="grid grid-cols-12 gap-4 p-4 bg-gray-50 text-gray-700 font-medium">
-                  <div className="col-span-1"></div>
-                  <div className="col-span-5">Title</div>
-                  <div className="col-span-2">Course</div>
-                  <div className="col-span-2">Upload Date</div>
-                  <div className="col-span-1">Downloads</div>
-                  <div className="col-span-1">Actions</div>
-                </div>
-                
-                {/* Table Rows */}
-                {documents.map(doc => (
-                  <div key={doc.id} className="grid grid-cols-12 gap-4 p-4 border-b border-gray-100 items-center">
-                    <div className="col-span-1">
-                      <input type="checkbox" className="w-4 h-4 rounded border-gray-300 text-brand-purple focus:ring-brand-purple/20" />
-                    </div>
-                    <div className="col-span-5 font-medium">{doc.title}</div>
-                    <div className="col-span-2 text-gray-600">{doc.course}</div>
-                    <div className="col-span-2 text-gray-600">{doc.uploadDate}</div>
-                    <div className="col-span-1 text-gray-600">{doc.downloads} Downloads</div>
-                    <div className="col-span-1 flex space-x-2">
-                      <button className="px-3 py-1 bg-brand-purple text-white text-sm rounded hover:bg-brand-purple-dark transition-colors">
-                        Edit
-                      </button>
-                      <button className="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 transition-colors">
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </>
-            ) : (
-              <div className="text-center py-16">
-                <div className="inline-flex items-center justify-center w-20 h-20 mb-6">
-                  <Folder className="h-16 w-16 text-brand-purple/30" />
-                </div>
-                <h3 className="text-xl font-medium mb-2">No documents uploaded yet. Start sharing!</h3>
-                <p className="text-gray-600 mb-6 max-w-md mx-auto">Upload your study materials to share with the community and help others succeed.</p>
-                <button className="bg-brand-purple text-white px-6 py-2.5 rounded-full font-medium hover:bg-brand-purple-dark transition-colors">
-                  Upload Document
-                </button>
-              </div>
-            )}
+            {/* Table */}
+            <div className="overflow-x-auto">
+              <table className="w-full mt-0 text-sm">
+                <thead>
+                  <tr className="bg-[#f7f7f8] text-gray-900 font-bold text-base border-b border-gray-100">
+                    <th className="px-6 py-4 w-11">
+                      <input type="checkbox" className="w-4 h-4" />
+                    </th>
+                    <th className="py-4 text-left font-extrabold">Title</th>
+                    <th className="py-4 text-left font-extrabold">Course</th>
+                    <th className="py-4 text-left font-extrabold">Upload Date</th>
+                    <th className="py-4 text-left font-extrabold">Downloads</th>
+                    <th className="py-4 text-left font-extrabold">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {!hasDocuments ? (
+                    <tr>
+                      <td colSpan={6} className="py-10 text-center">
+                        <img
+                          src="/lovable-uploads/e1eebe85-ec9f-40d3-bb3c-fbab3cc3c524.png"
+                          alt="No documents"
+                          className="w-32 h-32 mx-auto mb-5"
+                        />
+                        <div className="mb-2 text-lg font-medium text-gray-700">No documents uploaded yet. Start sharing!</div>
+                        <button className="bg-brand-purple text-white px-7 py-2.5 rounded-full font-medium hover:bg-brand-purple-dark transition-colors mt-3">
+                          Upload Document
+                        </button>
+                      </td>
+                    </tr>
+                  ) : (
+                    documents.map((doc) => (
+                      <tr key={doc.id} className="border-b border-gray-100">
+                        <td className="px-6 py-4">
+                          <input type="checkbox" className="w-4 h-4" />
+                        </td>
+                        <td className="py-4 font-medium">{doc.title}</td>
+                        <td className="py-4">{doc.course}</td>
+                        <td className="py-4">{doc.uploadDate}</td>
+                        <td className="py-4">{doc.downloads} Downloads</td>
+                        <td className="py-4">
+                          <button className="px-4 py-1 bg-brand-purple text-white text-sm rounded-full mr-2 hover:bg-brand-purple-dark transition-colors font-medium">
+                            Edit
+                          </button>
+                          <button className="px-4 py-1 bg-red-500 text-white text-sm rounded-full hover:bg-red-600 transition-colors font-medium">
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </main>
-      
       <Footer />
     </div>
   );
 };
 
 export default ManageDocuments;
+
