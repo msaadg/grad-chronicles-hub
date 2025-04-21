@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,6 +13,7 @@ import ManageDocuments from "./pages/ManageDocuments";
 import NotFound from "./pages/NotFound";
 import Chatbot from "./pages/Chatbot";
 import Profile from "./pages/Profile";
+import RecommendedCourses from "./pages/RecommendedCourses";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +34,7 @@ const App = () => (
           <Route path="/manage-documents" element={<ManageDocuments />} />
           <Route path="/chatbot" element={<Chatbot />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/recommended-courses" element={<RecommendedCourses />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
@@ -42,4 +43,3 @@ const App = () => (
 );
 
 export default App;
-
