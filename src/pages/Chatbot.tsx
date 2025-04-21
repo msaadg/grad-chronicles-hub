@@ -1,7 +1,8 @@
+
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Send, Search, FileText } from "lucide-react";
+import { Send, Search, FileText, Compass } from "lucide-react";
 
 const MOCK_MESSAGES = [
   {
@@ -127,3 +128,4 @@ const Chatbot = () => {
 };
 
 export default Chatbot;
+
